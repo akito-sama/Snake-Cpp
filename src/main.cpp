@@ -5,9 +5,10 @@
 #pragma region overload_vector
 std::ostream& operator<<(std::ostream& o, sf::Vector2i vector)
 {
-    std::cout << vector.x << ", " << vector.y;
+    o << vector.x << ", " << vector.y;
     return o;
 }
+
 #pragma endregion
 
 int main()
@@ -15,7 +16,7 @@ int main()
     srand((unsigned)time(0));
     Game game = Game();
     float Fps = 1.0f/15;
-    
+    std::cout << sf::Vector2i(5, 10);
     while (game.window.isOpen()) {
         game.event();
         game.draw();
