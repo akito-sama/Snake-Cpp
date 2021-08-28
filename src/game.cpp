@@ -40,6 +40,10 @@ class Game {
             background = sf::Sprite(backgroundTexture.getTexture());
         }
 
+        void reset() {
+            this->score = 0;
+        }
+
     public:
         unsigned int score = 0;
         int const WindowWidth = 600;
@@ -65,6 +69,14 @@ class Game {
             case sf::Event::Closed:
                 window.close();
                 break;
+            case sf::Event::KeyPressed:
+                if (event.key.code == sf::Keyboard::Escape && snake.dead)
+                {
+                    reset();
+                    snake.reset();
+                    apple.reset();
+                }
+                break;
             default:
                 break;
             }
@@ -83,7 +95,7 @@ class Game {
     void update()
     {
         if (!snake.dead)
-            snake.move(window.getSize());
+            snake.move(&window, &score);
         window.display();
     }
 };

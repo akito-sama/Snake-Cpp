@@ -39,3 +39,8 @@ void Apple::randomize()
     window->setTitle("Score = " + std::to_string(*this->score));
 }
 
+void Apple::reset()
+{
+    randomize();
+}
+

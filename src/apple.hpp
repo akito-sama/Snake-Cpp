@@ -7,7 +7,6 @@ class Snake;
 
 class Apple 
 {
-
 public:
     sf::Vector2i position;
     sf::RenderWindow* window;
@@ -24,6 +23,8 @@ public:
     Apple(sf::RenderWindow* window, int square_size, Snake* snake, unsigned int* score);
 
     void draw();
+
+    void reset();
 
     void randomize();
 };

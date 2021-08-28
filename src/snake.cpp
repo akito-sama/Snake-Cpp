@@ -5,7 +5,6 @@
 
 // std::ostream& operator<<(std::ostream& o, sf::Vector2i vector);
 
-
 Snake::Snake(int size, Apple* apple)
 {
     shape = sf::RectangleShape();
@@ -44,8 +43,9 @@ void Snake::draw(sf::RenderWindow& window)
     shape.setPosition(0, 0);
 }
 
-void Snake::move(sf::Vector2u windowSize)
+void Snake::move(sf::RenderWindow* windows, unsigned int* score)
 {
+    sf::Vector2u windowSize = windows->getSize();
     sf::Vector2i last = getLast();
     sf::Vector2i const head = getHead();
     int x = (head.x + mouvement.x), y = (head.y + mouvement.y);
@@ -64,6 +64,7 @@ void Snake::move(sf::Vector2u windowSize)
     }
     if (std::find(body.begin(), body.end(), last) != body.end())
     {
+        windows->setTitle("Game over your score was " + std::to_string(*score) + " points press Escape to restart");
         this->dead = true;
         this->dead_pos = last;
     }
@@ -102,7 +103,15 @@ void Snake::event(sf::Event _event)
     }
 
 }
+
 std::deque<sf::Vector2i>& Snake::getBody()
 {
     return this->body;
+}
+
+void Snake::reset()
+{
+    this->dead = false;
+    mouvement = mouvements[1];
+    body = {sf::Vector2i(0, 0), sf::Vector2i(1, 0)};
 }

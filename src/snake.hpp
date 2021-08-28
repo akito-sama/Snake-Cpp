@@ -32,9 +32,11 @@ public:
 
     void draw(sf::RenderWindow& window);
 
-    void move(sf::Vector2u windowSize);
+    void move(sf::RenderWindow* windows, unsigned int* score);
 
     void event(sf::Event _event);
+
+    void reset();
 
     std::deque<sf::Vector2i>& getBody();
 };
